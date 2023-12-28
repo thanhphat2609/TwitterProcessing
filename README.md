@@ -1,4 +1,4 @@
-# TwitterAnalysis with Azure
+# Twitter Processing with Azure
 
 ## Architecture 
 
