@@ -6,13 +6,13 @@ import json
 import time
 import csv
 
-EVENT_HUB_CONNECTION_STR = "Endpoint=sb://cloud-namespace.servicebus.windows.net/;SharedAccessKeyName=policy;SharedAccessKey=jFkGlYICLs65V/xKnC0mBg4D4UL+S/uVI+AEhB+83vw=;EntityPath=cloud-hub"  ##fill in with the connection string from EventHub
-EVENT_HUB_NAME = "cloud-hub"  ##fill in with the EventHub instance name
+EVENT_HUB_CONNECTION_STR = "Endpoint=sb://eventhubtwitter.servicebus.windows.net/;SharedAccessKeyName=stream_data;SharedAccessKey=vOrwNJIxCxnjScjVVars9lq6RCq2MbpkP+AEhBDV0QQ=;EntityPath=eventhubjob"  ##fill in with the connection string from EventHub
+EVENT_HUB_NAME = "eventhubjob"  ## fill in with the EventHub instance name
 
 credential = DefaultAzureCredential()
 
 async def read_data_from_csv(file_path):
-    with open(file_path, newline='') as csvfile:
+    with open(file_path, newline='', encoding='cp850') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             yield [row]
@@ -26,7 +26,7 @@ async def run():
     )
     
     # Replace 'path/to/your/file.csv' with the actual path to your CSV file.
-    csv_file_path = 'D:\Python\Streaming_Data.csv'
+    csv_file_path = '../dataset/Streaming_Data.csv'
     
     async with producer:
         # Read data from CSV file.
@@ -34,11 +34,10 @@ async def run():
             for row in batch_rows:
                 # Adjust the column names based on your CSV structure.
                 d = {
-                    "VendorID": row["VendorID"],
-                    "tpep_pickup_datetime": row["tpep_pickup_datetime"],
-                    "tpep_dropoff_datetime": row["tpep_dropoff_datetime"],
-                    "trip_distance": row["trip_distance"],
-                    "total_amount": row["total_amount"]
+                    "Tweet": row["Tweet"],
+                    "polarity": row["polarity"],
+                    "subjectivity": row["subjectivity"],
+                    "Sentiment": row["Sentiment"]
                 }
                 # Create a new batch for each row.
                 event_data_batch = await producer.create_batch()
@@ -47,7 +46,7 @@ async def run():
 
                 # Send the batch of events to the event hub.
                 await producer.send_batch(event_data_batch)
-                time.sleep(3)
+                time.sleep(2)
                 print(d)
 
     # Close credential when no longer needed.
