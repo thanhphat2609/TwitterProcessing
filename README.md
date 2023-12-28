@@ -18,6 +18,6 @@ python send_data.py
 - `StreamingProcessing.ipynb`: File for streaming processing.
 
 ## Video demo
-- Link: (ETLwithAzure)[https://youtu.be/LxWzAepsT4E].
+- Link: [ETLwithAzure](https://youtu.be/LxWzAepsT4E).
 
 Feel free to explore and enhance the project as needed!
