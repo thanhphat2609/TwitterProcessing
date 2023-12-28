@@ -2,7 +2,7 @@
 
 ## Architecture 
 
-![Architect](https://github.com/thanhphat2609/SalesManagement/assets/84914537/9bea12db-cc8e-4470-a23f-657c0a6c93a5)
+![Architect](https://github.com/thanhphat2609/Stock_Prediction/assets/84914537/06efc91e-37c7-466e-827f-a927aba27d85)
 
 ## Run file
 
